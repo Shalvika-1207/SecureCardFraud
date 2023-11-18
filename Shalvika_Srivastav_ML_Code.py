@@ -509,34 +509,6 @@ print("\nCLASSIFICATION REPORT FOR Support Vector Classifier\n\n")
 print(classification_report(y_train, clf_svc.predict(X_train), labels=[0, 1]))
 
 
-# In[ ]:
-
-
-"""### Logistic Regression Classifier"""
-from sklearn.linear_model import LogisticRegression
-
-# Define a search space for Logistic Regression
-log_reg_params = {"clf__penalty": ['l1', 'l2'], 'clf__C': [0.001, 0.01, 0.1, 1, 10, 100, 1000]}
-
-# Create a Logistic Regression classifier
-log_reg_classifier = LogisticRegression()
-
-# Create a pipeline that includes the Logistic Regression classifier
-pipeline_log_reg = Pipeline([
-    ('clf', log_reg_classifier),
-])
-
-# Use RandomizedSearchCV for Logistic Regression
-randomized_search_log_reg = RandomizedSearchCV(pipeline_log_reg, log_reg_params, scoring='f1_macro', cv=10, n_iter=10)
-randomized_search_log_reg.fit(X_train, y_train)
-clf_log_reg = randomized_search_log_reg.best_estimator_
-
-print("\nThe best parameters found for Logistic Regression are: \n", randomized_search_log_reg.best_params_)
-print("\nCLASSIFICATION REPORT FOR Logistic Regression\n\n")
-print(classification_report(y_train, clf_log_reg.predict(X_train), labels=[0, 1]))
-
-
-
 # # 4. Random Forest
 
 # In[34]:
